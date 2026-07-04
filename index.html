@@ -16,9 +16,12 @@
   <link rel="icon" type="image/png" href="assets/brand/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/brand/favicon-180.png">
   <link rel="preload" as="image" href="assets/new/hero-forest.webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260704-04">
+  <link rel="stylesheet" href="styles.css?v=20260704-05">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
   <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
     <span></span><span></span>
   </button>
@@ -40,7 +43,10 @@
       <a href="#contacts">Контакты</a>
     </nav>
     <button class="header-call" type="button" data-open-modal>Позвонить</button>
+    <div class="scroll-progress"><span data-scroll-progress></span></div>
   </header>
+
+  <nav class="dot-nav" aria-label="Быстрая навигация по разделам"></nav>
 
   <main>
     <section class="hero panel" id="hero">
@@ -50,7 +56,25 @@
         <h1 class="sr-only">Гармония - горная резиденция в Ялте</h1>
         <img class="hero__logo" src="assets/brand/logo-harmony-south.png" alt="Гармония - Южная резиденция">
       </div>
+      <a class="scroll-cue" href="#about" aria-label="Прокрутить к следующему разделу"></a>
     </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Гармония</span><span class="marquee__dot">✦</span>
+          <span>Южная резиденция</span><span class="marquee__dot">✦</span>
+          <span>Реликтовый лес Ялты</span><span class="marquee__dot">✦</span>
+          <span>Архитектура де-люкс</span><span class="marquee__dot">✦</span>
+        </div>
+        <div class="marquee__group">
+          <span>Гармония</span><span class="marquee__dot">✦</span>
+          <span>Южная резиденция</span><span class="marquee__dot">✦</span>
+          <span>Реликтовый лес Ялты</span><span class="marquee__dot">✦</span>
+          <span>Архитектура де-люкс</span><span class="marquee__dot">✦</span>
+        </div>
+      </div>
+    </div>
 
     <section class="about panel" id="about">
       <div class="about__top">
@@ -265,6 +289,13 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260704-04" defer></script>
+  <div class="lightbox" aria-hidden="true" role="dialog" aria-label="Просмотр фотографии">
+    <button class="lightbox__close" type="button" aria-label="Закрыть">×</button>
+    <button class="lightbox__prev" type="button" aria-label="Предыдущее фото">‹</button>
+    <img class="lightbox__img" src="" alt="">
+    <button class="lightbox__next" type="button" aria-label="Следующее фото">›</button>
+  </div>
+
+  <script src="script.js?v=20260704-05" defer></script>
 </body>
 </html>
