@@ -894,7 +894,9 @@ h3 {
   inset: 0;
   margin: 0;
   overflow: hidden;
-  background: #000;
+  display: grid;
+  place-items: center;
+  background: var(--bg-deep);
 }
 
 .video__frame::after {
@@ -912,7 +914,10 @@ h3 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* contain (not cover) so the film's real 16:9 frame is always shown
+     intact - same proportions on every device, letterboxed rather than
+     cropped differently depending on the viewport's aspect ratio. */
+  object-fit: contain;
 }
 
 .plans {
