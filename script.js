@@ -274,7 +274,7 @@ function animateCountUp(el) {
   requestAnimationFrame(tick);
 }
 
-const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong')];
+const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong, .map__distances strong')];
 
 if (prefersReducedMotion) {
   // Leave static values as authored.
@@ -292,7 +292,7 @@ if (prefersReducedMotion) {
 
 /* Cursor-reactive spotlight glow on cards */
 if (isFinePointer) {
-  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .infra-accordion article');
+  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
     card.addEventListener('mousemove', (event) => {

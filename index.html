@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" href="assets/brand/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/brand/favicon-180.png">
   <link rel="preload" as="image" href="assets/new/hero-forest.webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260704-05">
+  <link rel="stylesheet" href="styles.css?v=20260705-01">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -224,10 +224,19 @@
       </div>
     </section>
 
-    <section class="map-placeholder panel" id="map">
-      <div class="empty-frame reveal">
+    <section class="map panel" id="map">
+      <div class="map__head reveal">
         <p class="kicker">Карта</p>
-        <h2>Схема расположения будет добавлена позже</h2>
+        <h2>Резиденция и набережная - на одной схеме</h2>
+        <p>Наглядный ориентир: от горной резиденции до набережной Ялты - короткий и предсказуемый путь.</p>
+      </div>
+      <figure class="map__frame reveal">
+        <img src="assets/new/map-scheme.webp" alt="Схема расположения резиденции Гармония относительно набережной Ялты" loading="lazy" decoding="async">
+      </figure>
+      <div class="map__distances reveal" aria-label="Расстояния от Ялты">
+        <div><strong>82 км</strong><span>Симферопольский железнодорожный вокзал</span></div>
+        <div><strong>105 км</strong><span>Симферопольский международный аэропорт</span></div>
+        <div><strong>270 км</strong><span>Керченский мост</span></div>
       </div>
     </section>
 
@@ -296,6 +305,6 @@
     <button class="lightbox__next" type="button" aria-label="Следующее фото">›</button>
   </div>
 
-  <script src="script.js?v=20260704-05" defer></script>
+  <script src="script.js?v=20260705-01" defer></script>
 </body>
 </html>
