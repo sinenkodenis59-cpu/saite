@@ -76,6 +76,23 @@ const panelObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.panel').forEach((panel) => panelObserver.observe(panel));
 
+/* Project film: play once scrolled into view, pause when scrolled away */
+const filmVideo = document.querySelector('.video__frame video');
+const filmPanel = document.querySelector('.video.panel');
+
+if (filmVideo && filmPanel) {
+  const filmObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        filmVideo.play().catch(() => {});
+      } else {
+        filmVideo.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+  filmObserver.observe(filmPanel);
+}
+
 function createSimpleSlider({ trackSelector, prevSelector, nextSelector, countSelector, autoMs = 0 }) {
   const figures = [...document.querySelectorAll(`${trackSelector} figure`)];
   const prev = document.querySelector(prevSelector);
