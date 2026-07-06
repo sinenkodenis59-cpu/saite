@@ -595,7 +595,7 @@ h3 {
   z-index: -1;
   /* Kept modest: this layer blurs whatever scrolls behind a fixed, always-
      visible header, so its cost is paid continuously, not just on hover. */
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
 }
 
 .site-header.is-scrolled {
@@ -758,7 +758,6 @@ h3 {
 .hero__bg {
   object-fit: cover;
   transform: scale(1.035);
-  filter: brightness(.76) saturate(.92) contrast(1.04);
   animation: heroDrift 18s var(--ease) infinite alternate;
   animation-play-state: paused;
 }
@@ -783,7 +782,7 @@ h3 {
 
 .hero__logo {
   justify-self: center;
-  width: clamp(300px, 48vw, 640px);
+  width: clamp(150px, 24vw, 320px);
   margin: 0;
   opacity: .96;
 }
@@ -1136,7 +1135,6 @@ h3 {
 
 .infra-bg img {
   object-fit: cover;
-  filter: brightness(.62) saturate(.9);
 }
 
 .infra-stage::after {
@@ -1350,7 +1348,6 @@ h3 {
 
 .legacy > img {
   object-fit: cover;
-  filter: brightness(.72) saturate(.9);
 }
 
 .legacy__shade {
@@ -1953,7 +1950,7 @@ h3 {
   }
 
   .hero__logo {
-    width: clamp(230px, 76vw, 360px);
+    width: clamp(115px, 38vw, 180px);
     margin-bottom: 0;
   }
 
