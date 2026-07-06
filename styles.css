@@ -68,7 +68,7 @@
   --gold-bright: #e0c986;
   --green: #6d775e;
   --stone: #b7b0a2;
-  --shadow: 0 34px 120px rgba(0, 0, 0, .42);
+  --shadow: 0 24px 64px rgba(0, 0, 0, .42);
   --ease: cubic-bezier(.22, 1, .36, 1);
   --sans: "Manrope Var", Inter, "Segoe UI", Arial, Helvetica, sans-serif;
   --serif: "Cormorant Garamond Var", "Times New Roman", Georgia, serif;
@@ -118,8 +118,11 @@ body::before {
   inset: -60px;
   z-index: 500;
   pointer-events: none;
-  opacity: .05;
-  mix-blend-mode: overlay;
+  opacity: .045;
+  /* No mix-blend-mode: blending a full-viewport layer against everything
+     beneath it forces the compositor to re-evaluate on every scroll/paint,
+     which is a real jank source. Plain low-opacity noise reads almost the
+     same against this dark palette without that cost. */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grainShift 1.1s steps(4) infinite;
 }
@@ -273,6 +276,11 @@ body.has-cursor button {
   display: flex;
   width: max-content;
   animation: marqueeScroll 32s linear infinite;
+  animation-play-state: paused;
+}
+
+.marquee.is-current .marquee__track {
+  animation-play-state: running;
 }
 
 .marquee:hover .marquee__track {
@@ -327,6 +335,11 @@ body.has-cursor button {
   border-radius: 50%;
   background: var(--gold-bright);
   animation: scrollCue 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.panel.is-current .scroll-cue::after {
+  animation-play-state: running;
 }
 
 @keyframes scrollCue {
@@ -580,7 +593,9 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  backdrop-filter: blur(22px);
+  /* Kept modest: this layer blurs whatever scrolls behind a fixed, always-
+     visible header, so its cost is paid continuously, not just on hover. */
+  backdrop-filter: blur(14px);
 }
 
 .site-header.is-scrolled {
@@ -745,6 +760,11 @@ h3 {
   transform: scale(1.035);
   filter: brightness(.76) saturate(.92) contrast(1.04);
   animation: heroDrift 18s var(--ease) infinite alternate;
+  animation-play-state: paused;
+}
+
+.panel.is-current .hero__bg {
+  animation-play-state: running;
 }
 
 .hero__shade {
@@ -1606,6 +1626,11 @@ h3 {
 .architecture__images img {
   opacity: 0;
   animation: fullSceneFade 14s var(--ease) infinite;
+  animation-play-state: paused;
+}
+
+.panel.is-current .architecture__images img {
+  animation-play-state: running;
 }
 
 .architecture__images img:nth-child(2) {
@@ -1663,6 +1688,11 @@ h3 {
 
 .location__image img {
   animation: locationScenePan 18s var(--ease) infinite alternate;
+  animation-play-state: paused;
+}
+
+.panel.is-current .location__image img {
+  animation-play-state: running;
 }
 
 .location__metrics {

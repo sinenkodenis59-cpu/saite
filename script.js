@@ -10,7 +10,6 @@ function syncHeader() {
 }
 
 syncHeader();
-window.addEventListener('scroll', syncHeader, { passive: true });
 
 menuToggle?.addEventListener('click', () => {
   const open = body.classList.toggle('menu-open');
@@ -76,12 +75,33 @@ const panelObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.panel').forEach((panel) => panelObserver.observe(panel));
 
-/* Project film: play once scrolled into view, pause when scrolled away */
+const marqueeEl = document.querySelector('.marquee');
+if (marqueeEl) panelObserver.observe(marqueeEl);
+
+/* Project film: the source is only attached once the section is nearly in
+   view (preload="metadata" is not a reliable guard - browsers can still
+   fetch the whole file up front), then it plays while visible and pauses
+   when scrolled away in either direction. */
 const filmVideo = document.querySelector('.video__frame video');
 const filmPanel = document.querySelector('.video.panel');
 
 if (filmVideo && filmPanel) {
-  const filmObserver = new IntersectionObserver((entries) => {
+  const filmLoadObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && filmVideo.dataset.src) {
+        const source = document.createElement('source');
+        source.src = filmVideo.dataset.src;
+        source.type = 'video/mp4';
+        filmVideo.appendChild(source);
+        filmVideo.load();
+        delete filmVideo.dataset.src;
+        filmLoadObserver.disconnect();
+      }
+    });
+  }, { rootMargin: '600px 0px' });
+  filmLoadObserver.observe(filmPanel);
+
+  const filmPlayObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         filmVideo.play().catch(() => {});
@@ -90,7 +110,7 @@ if (filmVideo && filmPanel) {
       }
     });
   }, { threshold: 0.5 });
-  filmObserver.observe(filmPanel);
+  filmPlayObserver.observe(filmPanel);
 }
 
 function createSimpleSlider({ trackSelector, prevSelector, nextSelector, countSelector, autoMs = 0 }) {
@@ -189,8 +209,6 @@ function syncScrollProgress() {
 }
 
 syncScrollProgress();
-window.addEventListener('scroll', syncScrollProgress, { passive: true });
-window.addEventListener('resize', syncScrollProgress);
 
 /* Dot navigation built from the primary nav */
 const dotNav = document.querySelector('.dot-nav');
@@ -237,8 +255,27 @@ function updateActiveSection() {
 }
 
 updateActiveSection();
-window.addEventListener('scroll', updateActiveSection, { passive: true });
-window.addEventListener('resize', updateActiveSection);
+
+/* Scroll/resize work (header state, progress bar, scrollspy) is batched
+   into a single rAF tick instead of three independent listeners each
+   forcing their own layout read on every raw scroll event. */
+let scrollTicking = false;
+
+function onScrollFrame() {
+  syncHeader();
+  syncScrollProgress();
+  updateActiveSection();
+  scrollTicking = false;
+}
+
+function requestScrollUpdate() {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(onScrollFrame);
+}
+
+window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+window.addEventListener('resize', requestScrollUpdate);
 
 /* Split-word heading reveal */
 function splitHeadingWords(el) {
@@ -307,13 +344,19 @@ if (prefersReducedMotion) {
   countTargets.forEach((el) => countObserver.observe(el));
 }
 
-/* Cursor-reactive spotlight glow on cards */
+/* Cursor-reactive spotlight glow on cards.
+   The rect is read once on mouseenter (not on every mousemove) so hovering
+   doesn't force a layout read per pixel of pointer movement. */
 if (isFinePointer) {
   const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
+    let rect = null;
+    card.addEventListener('mouseenter', () => {
+      rect = card.getBoundingClientRect();
+    });
     card.addEventListener('mousemove', (event) => {
-      const rect = card.getBoundingClientRect();
+      if (!rect) rect = card.getBoundingClientRect();
       card.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
       card.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
     });
@@ -424,11 +467,18 @@ if (isFinePointer && !prefersReducedMotion) {
     el.addEventListener('mouseleave', () => body.classList.remove('cursor-hover'));
   });
 
+  /* Rects are cached on mouseenter (not re-read on every mousemove) so
+     hovering these elements doesn't force a layout read per pixel of
+     pointer movement. */
   const magneticTargets = document.querySelectorAll('.primary-btn, .header-call, .text-button');
   magneticTargets.forEach((el) => {
     el.classList.add('magnetic');
+    let rect = null;
+    el.addEventListener('mouseenter', () => {
+      rect = el.getBoundingClientRect();
+    });
     el.addEventListener('mousemove', (event) => {
-      const rect = el.getBoundingClientRect();
+      if (!rect) rect = el.getBoundingClientRect();
       const relX = event.clientX - (rect.left + rect.width / 2);
       const relY = event.clientY - (rect.top + rect.height / 2);
       el.style.transform = `translate3d(${relX * 0.28}px, ${relY * 0.4}px, 0)`;
@@ -442,10 +492,14 @@ if (isFinePointer && !prefersReducedMotion) {
   const heroTitle = document.querySelector('.hero__title');
   const heroSection = document.querySelector('.hero');
   if (heroTitle && heroSection) {
+    let heroRect = null;
+    heroSection.addEventListener('mouseenter', () => {
+      heroRect = heroSection.getBoundingClientRect();
+    });
     heroSection.addEventListener('mousemove', (event) => {
-      const rect = heroSection.getBoundingClientRect();
-      const relX = (event.clientX - rect.left) / rect.width - 0.5;
-      const relY = (event.clientY - rect.top) / rect.height - 0.5;
+      if (!heroRect) heroRect = heroSection.getBoundingClientRect();
+      const relX = (event.clientX - heroRect.left) / heroRect.width - 0.5;
+      const relY = (event.clientY - heroRect.top) / heroRect.height - 0.5;
       heroTitle.style.transform = `translate3d(${relX * 18}px, ${relY * 14}px, 0)`;
     });
     heroSection.addEventListener('mouseleave', () => {
