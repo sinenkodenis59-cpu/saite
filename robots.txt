@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://harmony-yalta.ru/sitemap.xml
+Sitemap: https://гармония-ялта.рф/sitemap.xml
