@@ -1389,12 +1389,14 @@ h3 {
   gap: 10px;
   color: var(--ink-soft);
   text-decoration: none;
+  line-height: 1;
 }
 
 .telegram-link__icon {
   display: grid;
   width: 34px;
   height: 34px;
+  flex: 0 0 34px;
   place-items: center;
   border: 1px solid rgba(224, 201, 134, .36);
   border-radius: 50%;
@@ -1990,6 +1992,22 @@ h3 {
 
   .footer {
     grid-template-columns: 1fr;
+  }
+
+  .telegram-link {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .telegram-link__icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+
+  .telegram-link__icon svg {
+    width: 14px;
+    height: 14px;
   }
 
   .modal {
