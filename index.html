@@ -319,10 +319,12 @@
       <p class="kicker">Гармония</p>
       <h2>Получить презентацию</h2>
       <p>Оставьте контакты, и менеджер свяжется с вами для отправки материалов.</p>
-      <form class="contact-form">
+      <form class="contact-form" action="send.php" method="post">
         <label><span>Ваше имя</span><input type="text" name="name" required></label>
         <label><span>Телефон</span><input type="tel" name="phone" required></label>
+        <input type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" class="form-hp">
         <button class="primary-btn" type="submit">Отправить</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
         <p class="form-consent">Нажимая «Отправить», вы соглашаетесь с <a href="docs/personal-data-consent.html" target="_blank" rel="noopener">обработкой персональных данных</a> и <a href="docs/user-agreement.html" target="_blank" rel="noopener">условиями Пользовательского соглашения</a>.</p>
       </form>
     </div>

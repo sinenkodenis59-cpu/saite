@@ -49,10 +49,47 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeModal();
 });
 
-document.querySelectorAll('form').forEach((form) => {
+document.querySelectorAll('.contact-form').forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    closeModal();
+
+    const submit = form.querySelector('[type="submit"]');
+    const status = form.querySelector('.form-status');
+    const endpoint = form.getAttribute('action') || 'send.php';
+    const formData = new FormData(form);
+
+    if (status) {
+      status.textContent = 'Отправляем заявку...';
+      status.classList.remove('is-error', 'is-success');
+    }
+
+    if (submit) submit.disabled = true;
+
+    fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.ok === false) {
+          throw new Error(data.message || 'Не удалось отправить заявку.');
+        }
+        if (status) {
+          status.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+          status.classList.add('is-success');
+        }
+        form.reset();
+      })
+      .catch((error) => {
+        if (status) {
+          status.textContent = error.message || 'Не удалось отправить заявку. Попробуйте еще раз.';
+          status.classList.add('is-error');
+        }
+      })
+      .finally(() => {
+        if (submit) submit.disabled = false;
+      });
   });
 });
 

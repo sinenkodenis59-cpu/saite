@@ -1492,6 +1492,15 @@ h3 {
   gap: 14px;
 }
 
+.form-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .contact-form label {
   display: grid;
   gap: 8px;
@@ -1516,6 +1525,27 @@ h3 {
 
 .contact-form input:focus {
   border-color: rgba(224, 201, 134, .58);
+}
+
+.contact-form .primary-btn:disabled {
+  cursor: wait;
+  opacity: .68;
+}
+
+.form-status {
+  min-height: 1.4em;
+  margin: -4px 0 0;
+  color: rgba(244, 240, 231, .72);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.form-status.is-success {
+  color: var(--gold-bright);
+}
+
+.form-status.is-error {
+  color: #e8a49a;
 }
 
 .form-consent {
