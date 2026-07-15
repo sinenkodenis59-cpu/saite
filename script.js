@@ -235,6 +235,21 @@ infraPanels.forEach((panel) => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+/* Developer accordion */
+const developerPanels = [...document.querySelectorAll('[data-developer-panel]')];
+
+function activateDeveloperPanel(panel) {
+  developerPanels.forEach((item) => item.classList.toggle('is-active', item === panel));
+}
+
+developerPanels.forEach((panel) => {
+  panel.addEventListener('click', () => activateDeveloperPanel(panel));
+  panel.addEventListener('focus', () => activateDeveloperPanel(panel));
+  panel.addEventListener('mouseenter', () => {
+    if (isFinePointer) activateDeveloperPanel(panel);
+  });
+});
+
 /* Scroll progress bar */
 const scrollProgress = document.querySelector('[data-scroll-progress]');
 
@@ -385,7 +400,7 @@ if (prefersReducedMotion) {
    The rect is read once on mouseenter (not on every mousemove) so hovering
    doesn't force a layout read per pixel of pointer movement. */
 if (isFinePointer) {
-  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts > div, .infra-accordion article');
+  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts > div, .developer__slide, .developer__projects span, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
     let rect = null;
