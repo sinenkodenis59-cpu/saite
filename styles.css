@@ -1492,7 +1492,7 @@ h3 {
 
 .developer__side {
   display: grid;
-  grid-template-rows: minmax(440px, 1fr) auto auto;
+  grid-template-rows: minmax(440px, 1fr) auto;
   align-self: stretch;
   gap: 14px;
   min-height: calc(100svh - var(--header-h) - 104px);
@@ -1591,36 +1591,6 @@ h3 {
   min-height: 104px;
   background: rgba(255, 255, 255, .045);
   backdrop-filter: blur(12px);
-}
-
-.developer__projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, .04);
-  backdrop-filter: blur(12px);
-}
-
-.developer__projects span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding: 0 12px;
-  border: 1px solid rgba(224, 201, 134, .28);
-  border-radius: 999px;
-  color: var(--ink-soft);
-  font-size: 12px;
-  transition: color .28s ease, border-color .28s ease, background .28s ease, transform .28s ease;
-}
-
-.developer__projects span:hover {
-  color: var(--ink);
-  border-color: rgba(224, 201, 134, .54);
-  background: rgba(224, 201, 134, .09);
-  transform: translateY(-1px);
 }
 
 .legacy {
@@ -2174,7 +2144,7 @@ h3 {
 
   .developer__side {
     min-height: auto;
-    grid-template-rows: minmax(430px, 58vh) auto auto;
+    grid-template-rows: minmax(430px, 58vh) auto;
   }
 
   .developer__slider {
@@ -2304,10 +2274,6 @@ h3 {
 
   .developer__slide.is-active {
     flex: 3.6;
-  }
-
-  .developer__projects {
-    padding: 14px;
   }
 
   .architecture__images {

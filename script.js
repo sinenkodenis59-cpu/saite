@@ -400,7 +400,7 @@ if (prefersReducedMotion) {
    The rect is read once on mouseenter (not on every mousemove) so hovering
    doesn't force a layout read per pixel of pointer movement. */
 if (isFinePointer) {
-  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts > div, .developer__slide, .developer__projects span, .infra-accordion article');
+  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts > div, .developer__slide, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
     let rect = null;
