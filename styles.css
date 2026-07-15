@@ -1443,10 +1443,9 @@ h3 {
   position: relative;
   z-index: 3;
   max-width: 590px;
-  padding: clamp(18px, 2.4vw, 30px);
+  padding: 0 0 0 clamp(18px, 2.2vw, 28px);
   border-left: 1px solid rgba(224, 201, 134, .44);
-  background: linear-gradient(120deg, rgba(9, 11, 8, .76), rgba(9, 11, 8, .36));
-  backdrop-filter: blur(16px);
+  text-shadow: 0 16px 40px rgba(0, 0, 0, .42);
 }
 
 .developer__text {
@@ -1582,32 +1581,6 @@ h3 {
   transform: scale(1.015);
 }
 
-.developer__slide span {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  z-index: 3;
-  color: var(--ink);
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-shadow: 0 8px 24px rgba(0, 0, 0, .55);
-  opacity: .76;
-  transition: opacity .35s ease, transform .45s ease;
-}
-
-.developer__slide:not(.is-active) span {
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%) rotate(-90deg);
-  transform-origin: center;
-}
-
-.developer__slide.is-active span {
-  opacity: 1;
-}
-
 .developer__facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1700,6 +1673,12 @@ h3 {
   margin-bottom: 24px;
 }
 
+.footer__messengers {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+
 .telegram-link {
   display: inline-flex;
   align-items: center;
@@ -1726,6 +1705,14 @@ h3 {
   width: 17px;
   height: 17px;
   fill: currentColor;
+}
+
+.max-link__icon {
+  color: var(--gold-bright);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
 }
 
 .telegram-link:hover .telegram-link__icon {
@@ -2298,7 +2285,7 @@ h3 {
   }
 
   .developer__copy {
-    padding: 18px;
+    padding-left: 18px;
   }
 
   .developer__side {
@@ -2317,12 +2304,6 @@ h3 {
 
   .developer__slide.is-active {
     flex: 3.6;
-  }
-
-  .developer__slide span {
-    left: 14px;
-    bottom: 14px;
-    font-size: 10px;
   }
 
   .developer__projects {
