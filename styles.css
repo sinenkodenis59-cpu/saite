@@ -624,8 +624,8 @@ h3 {
 .nav {
   display: flex;
   justify-content: center;
-  gap: clamp(10px, 1.15vw, 18px);
-  font-size: 10px;
+  gap: clamp(8px, .9vw, 14px);
+  font-size: 9.5px;
   font-weight: 650;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -819,7 +819,8 @@ h3 {
 
 .about__facts div,
 .location__metrics div,
-.map__distances div {
+.map__distances div,
+.developer__facts div {
   min-height: 118px;
   padding: 20px;
   border: 1px solid var(--line);
@@ -829,7 +830,8 @@ h3 {
 
 .about__facts strong,
 .location__metrics strong,
-.map__distances strong {
+.map__distances strong,
+.developer__facts strong {
   display: block;
   margin-bottom: 9px;
   color: var(--gold-bright);
@@ -842,7 +844,8 @@ h3 {
 
 .about__facts span,
 .location__metrics span,
-.map__distances span {
+.map__distances span,
+.developer__facts span {
   display: block;
   color: var(--ink-soft);
   font-size: 14px;
@@ -1330,6 +1333,138 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+}
+
+.genplan {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(20px, 3.2vh, 34px);
+  padding: calc(var(--header-h) + 42px) clamp(22px, 6vw, 90px) 58px;
+  background:
+    radial-gradient(circle at 68% 44%, rgba(224, 201, 134, .16), transparent 34%),
+    linear-gradient(145deg, #11160f 0%, #0a0c09 48%, #14130d 100%);
+}
+
+.genplan__head {
+  width: var(--container);
+  display: grid;
+  grid-template-columns: minmax(120px, .25fr) minmax(0, .75fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: end;
+}
+
+.genplan__head h2 {
+  max-width: 760px;
+  margin: 0;
+}
+
+.genplan__frame {
+  width: min(1180px, 100%);
+  max-height: min(60vh, 660px);
+  margin: 0;
+  border: 1px solid rgba(224, 201, 134, .24);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #101522;
+  box-shadow: 0 34px 120px rgba(0, 0, 0, .42);
+}
+
+.genplan__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  transition: transform 1.6s var(--ease), filter 1.6s var(--ease);
+}
+
+.panel.is-current .genplan__frame img {
+  transform: scale(1.018);
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.genplan__caption {
+  width: min(860px, var(--container));
+  justify-self: end;
+  padding-left: clamp(18px, 2vw, 28px);
+  border-left: 1px solid rgba(224, 201, 134, .42);
+}
+
+.genplan__caption p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.08vw, 18px);
+  line-height: 1.7;
+}
+
+.developer {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(300px, .48fr);
+  align-content: center;
+  align-items: center;
+  gap: clamp(30px, 6vw, 92px);
+  padding: calc(var(--header-h) + 48px) clamp(22px, 7vw, 110px) 64px;
+  background:
+    linear-gradient(135deg, rgba(244, 240, 231, .04), transparent 36%),
+    linear-gradient(160deg, #0c0f0a 0%, #15150f 58%, #090b08 100%);
+}
+
+.developer__copy {
+  max-width: 780px;
+}
+
+.developer__text {
+  display: grid;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.developer__text p {
+  margin: 0;
+  color: rgba(244, 240, 231, .72);
+  font-size: clamp(15px, 1.06vw, 18px);
+  line-height: 1.74;
+}
+
+.developer__text strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.developer__side {
+  display: grid;
+  gap: 18px;
+}
+
+.developer__facts {
+  display: grid;
+  gap: 12px;
+}
+
+.developer__facts div {
+  min-height: 112px;
+}
+
+.developer__projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.developer__projects span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(224, 201, 134, .28);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 12px;
 }
 
 .legacy {
@@ -1851,12 +1986,14 @@ h3 {
   .plans,
   .architecture,
   .gallery,
-  .location {
+  .location,
+  .developer {
     grid-template-columns: 1fr;
   }
 
   .plans__copy,
-  .architecture__copy {
+  .architecture__copy,
+  .developer__copy {
     max-width: 760px;
   }
 
@@ -1904,6 +2041,8 @@ h3 {
   .architecture,
   .gallery,
   .location,
+  .genplan,
+  .developer,
   .legacy {
     padding-left: 18px;
     padding-right: 18px;
@@ -1918,7 +2057,9 @@ h3 {
   .about__bottom,
   .about__facts,
   .location__metrics,
-  .map__distances {
+  .map__distances,
+  .developer__facts,
+  .genplan__head {
     grid-template-columns: 1fr;
   }
 
@@ -1938,6 +2079,23 @@ h3 {
   .location__image,
   .gallery__slider {
     aspect-ratio: 4 / 3;
+  }
+
+  .genplan__head,
+  .genplan__caption {
+    width: 100%;
+  }
+
+  .genplan__frame {
+    max-height: none;
+  }
+
+  .genplan__frame img {
+    min-height: 300px;
+  }
+
+  .developer {
+    gap: 28px;
   }
 
   .architecture__images {
