@@ -1685,6 +1685,11 @@ h3 {
   text-transform: uppercase;
 }
 
+.vk-link__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 .telegram-link:hover .telegram-link__icon {
   border-color: rgba(224, 201, 134, .72);
   background: rgba(224, 201, 134, .16);
