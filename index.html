@@ -31,7 +31,7 @@
   <link rel="icon" type="image/png" href="assets/brand/favicon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/brand/favicon-180.png">
   <link rel="preload" as="image" href="assets/new/hero-forest.webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260720-01">
+  <link rel="stylesheet" href="styles.css?v=20260904-devslider">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -298,44 +298,28 @@
       </div>
     </section>
 
-    <section class="developer panel" id="developer">
-      <div class="developer__copy reveal">
-        <p class="kicker">Девелопер проекта</p>
-        <h2>Алеша Эстейт — строительная компания полного цикла</h2>
-        <div class="developer__text">
-          <p>Строительство резиденции «Гармония» осуществляет <strong>Алеша Эстейт</strong> — строительная компания полного цикла, работающая на рынке с 2014 года.</p>
-          <p>За более чем <strong>10 лет</strong> компания сформировала команду из <strong>200+ специалистов</strong>, собственную производственную базу и реализовала десятки проектов жилой, коммерческой и курортной недвижимости на территории Крыма.</p>
-          <p>Компания выполняет полный комплекс строительных работ, обеспечивая высокий уровень качества, инженерной подготовки и соблюдение современных строительных стандартов.</p>
-        </div>
-        <a class="developer__link" href="http://aleshaestate.ru/" target="_blank" rel="noopener">Сайт девелопера</a>
+    <section class="developer panel" id="developer" aria-label="Девелопер проекта">
+      <div class="developer__slider" aria-hidden="true">
+        <figure class="developer__slide is-active">
+          <img src="assets/developer/developer-project-01.webp" alt="" loading="lazy" decoding="async">
+        </figure>
+        <figure class="developer__slide">
+          <img src="assets/developer/developer-project-02.webp" alt="" loading="lazy" decoding="async">
+        </figure>
+        <figure class="developer__slide">
+          <img src="assets/developer/developer-project-03.webp" alt="" loading="lazy" decoding="async">
+        </figure>
+        <figure class="developer__slide">
+          <img src="assets/developer/developer-project-04.webp" alt="" loading="lazy" decoding="async">
+        </figure>
+        <figure class="developer__slide">
+          <img src="assets/developer/developer-project-05.webp" alt="" loading="lazy" decoding="async">
+        </figure>
+        <figure class="developer__slide">
+          <img src="assets/developer/developer-project-06.webp" alt="" loading="lazy" decoding="async">
+        </figure>
       </div>
-      <div class="developer__side reveal">
-        <div class="developer__slider" aria-label="Реализованные проекты девелопера">
-          <button class="developer__slide is-active" type="button" data-developer-panel aria-label="Sky Plaza">
-            <img src="assets/developer/developer-project-01.webp" alt="Проект девелопера на первой линии моря в Ялте" loading="lazy" decoding="async">
-          </button>
-          <button class="developer__slide" type="button" data-developer-panel aria-label="RoYalta">
-            <img src="assets/developer/developer-project-02.webp" alt="Коммерческая галерея и прогулочная зона в Ялте" loading="lazy" decoding="async">
-          </button>
-          <button class="developer__slide" type="button" data-developer-panel aria-label="Курортная недвижимость">
-            <img src="assets/developer/developer-project-03.webp" alt="Курортный объект с бассейном и видом на море" loading="lazy" decoding="async">
-          </button>
-          <button class="developer__slide" type="button" data-developer-panel aria-label="Фабрикантъ">
-            <img src="assets/developer/developer-project-04.webp" alt="Ресторанный комплекс на территории курортного объекта" loading="lazy" decoding="async">
-          </button>
-          <button class="developer__slide" type="button" data-developer-panel aria-label="Park Plaza">
-            <img src="assets/developer/developer-project-05.webp" alt="Park Plaza среди зеленой территории" loading="lazy" decoding="async">
-          </button>
-          <button class="developer__slide" type="button" data-developer-panel aria-label="Проект на набережной">
-            <img src="assets/developer/developer-project-06.webp" alt="Реализованный проект девелопера на морской набережной в вечернем освещении" loading="lazy" decoding="async">
-          </button>
-        </div>
-        <div class="developer__facts" aria-label="Ключевые факты о девелопере">
-          <div><strong>2014</strong><span>год основания компании</span></div>
-          <div><strong>10+</strong><span>лет опыта на рынке</span></div>
-          <div><strong>200+</strong><span>специалистов в команде</span></div>
-        </div>
-      </div>
+      <div class="developer__shade"></div>
     </section>
 
     <section class="legacy panel" id="legacy">
@@ -429,6 +413,6 @@
     <button class="lightbox__next" type="button" aria-label="Следующее фото">›</button>
   </div>
 
-  <script src="script.js?v=20260715-07" defer></script>
+  <script src="script.js?v=20260904-devslider" defer></script>
 </body>
 </html>

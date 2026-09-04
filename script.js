@@ -235,20 +235,26 @@ infraPanels.forEach((panel) => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-/* Developer accordion */
-const developerPanels = [...document.querySelectorAll('[data-developer-panel]')];
+const developerSlides = [...document.querySelectorAll('#developer .developer__slide')];
 
-function activateDeveloperPanel(panel) {
-  developerPanels.forEach((item) => item.classList.toggle('is-active', item === panel));
-}
+if (developerSlides.length) {
+  let developerSlideIndex = developerSlides.findIndex((slide) => slide.classList.contains('is-active'));
 
-developerPanels.forEach((panel) => {
-  panel.addEventListener('click', () => activateDeveloperPanel(panel));
-  panel.addEventListener('focus', () => activateDeveloperPanel(panel));
-  panel.addEventListener('mouseenter', () => {
-    if (isFinePointer) activateDeveloperPanel(panel);
+  if (developerSlideIndex < 0) developerSlideIndex = 0;
+
+  developerSlides.forEach((slide, index) => {
+    slide.classList.toggle('is-active', index === developerSlideIndex);
   });
-});
+
+  if (!prefersReducedMotion && developerSlides.length > 1) {
+    window.setInterval(() => {
+      developerSlideIndex = (developerSlideIndex + 1) % developerSlides.length;
+      developerSlides.forEach((slide, index) => {
+        slide.classList.toggle('is-active', index === developerSlideIndex);
+      });
+    }, 5200);
+  }
+}
 
 /* Scroll progress bar */
 const scrollProgress = document.querySelector('[data-scroll-progress]');
@@ -380,7 +386,7 @@ function animateCountUp(el) {
   requestAnimationFrame(tick);
 }
 
-const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong, .map__distances strong, .developer__facts strong')];
+const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong, .map__distances strong')];
 
 if (prefersReducedMotion) {
   // Leave static values as authored.
@@ -400,7 +406,7 @@ if (prefersReducedMotion) {
    The rect is read once on mouseenter (not on every mousemove) so hovering
    doesn't force a layout read per pixel of pointer movement. */
 if (isFinePointer) {
-  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts > div, .developer__slide, .infra-accordion article');
+  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
     let rect = null;
