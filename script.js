@@ -386,7 +386,7 @@ function animateCountUp(el) {
   requestAnimationFrame(tick);
 }
 
-const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong, .map__distances strong')];
+const countTargets = [...document.querySelectorAll('.about__facts strong, .location__metrics strong, .map__distances strong, .developer__facts strong')];
 
 if (prefersReducedMotion) {
   // Leave static values as authored.
@@ -406,7 +406,7 @@ if (prefersReducedMotion) {
    The rect is read once on mouseenter (not on every mousemove) so hovering
    doesn't force a layout read per pixel of pointer movement. */
 if (isFinePointer) {
-  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .infra-accordion article');
+  const spotlightCards = document.querySelectorAll('.about__facts > div, .location__metrics > div, .map__distances > div, .developer__facts span, .infra-accordion article');
   spotlightCards.forEach((card) => {
     card.classList.add('spotlight');
     let rect = null;
