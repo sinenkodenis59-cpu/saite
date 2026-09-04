@@ -480,6 +480,16 @@ body.has-cursor button {
 .lightbox__prev { left: 18px; }
 .lightbox__next { right: 18px; }
 
+.lightbox.is-static .lightbox__prev,
+.lightbox.is-static .lightbox__next {
+  display: none;
+}
+
+.lightbox.is-static .lightbox__img {
+  max-width: min(1800px, calc(100vw - 40px));
+  max-height: calc(100svh - 48px);
+}
+
 .gallery__track figure {
   cursor: zoom-in;
 }
@@ -1365,22 +1375,28 @@ h3 {
 
 .genplan__frame {
   position: relative;
-  width: min(1180px, 100%);
-  max-height: min(60vh, 660px);
+  width: min(1180px, 100%, calc(62svh * 2200 / 1228));
+  aspect-ratio: 2200 / 1228;
   margin: 0;
   border: 1px solid rgba(224, 201, 134, .24);
   border-radius: 8px;
   overflow: hidden;
   background: #101522;
   box-shadow: 0 34px 120px rgba(0, 0, 0, .42);
+  cursor: zoom-in;
+  outline: none;
+}
+
+.genplan__frame:focus-visible {
+  border-color: rgba(224, 201, 134, .72);
+  box-shadow: 0 0 0 3px rgba(224, 201, 134, .18), 0 34px 120px rgba(0, 0, 0, .42);
 }
 
 .genplan__frame img {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 360px;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 1.6s var(--ease), filter 1.6s var(--ease);
 }
 
@@ -1406,6 +1422,34 @@ h3 {
   letter-spacing: .16em;
   text-transform: uppercase;
   backdrop-filter: blur(12px);
+}
+
+.genplan__open {
+  position: absolute;
+  right: clamp(18px, 2.2vw, 28px);
+  bottom: clamp(18px, 2.2vw, 28px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid rgba(248, 241, 225, .26);
+  border-radius: 999px;
+  background: rgba(8, 10, 8, .44);
+  color: rgba(248, 241, 225, .84);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  transition: color .3s ease, border-color .3s ease, background .3s ease, transform .3s var(--ease);
+}
+
+.genplan__frame:hover .genplan__open,
+.genplan__frame:focus-visible .genplan__open {
+  color: var(--gold-bright);
+  border-color: rgba(224, 201, 134, .58);
+  background: rgba(8, 10, 8, .64);
+  transform: translateY(-2px);
 }
 
 .genplan__caption {
@@ -2188,11 +2232,29 @@ h3 {
   }
 
   .genplan__frame {
-    max-height: none;
+    width: 100%;
   }
 
   .genplan__frame img {
-    min-height: 300px;
+    min-height: 0;
+  }
+
+  .genplan__badge,
+  .genplan__open {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+
+  .genplan__badge {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .genplan__open {
+    right: 12px;
+    bottom: 12px;
   }
 
   .developer__shade {

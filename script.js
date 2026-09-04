@@ -425,6 +425,17 @@ if (isFinePointer) {
 const lightbox = document.querySelector('.lightbox');
 const lightboxImg = lightbox?.querySelector('.lightbox__img');
 const galleryFigures = [...document.querySelectorAll('[data-gallery-track] figure')];
+const genplanFrame = document.querySelector('[data-genplan-open]');
+
+function openImageLightbox(src, alt = '', staticMode = false) {
+  if (!lightbox || !lightboxImg || !src) return;
+  lightboxImg.src = src;
+  lightboxImg.alt = alt;
+  lightbox.classList.toggle('is-static', staticMode);
+  lightbox.classList.add('is-open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  body.classList.add('modal-open');
+}
 
 function updateLightboxImage() {
   if (!gallerySlider || !lightboxImg) return;
@@ -440,6 +451,7 @@ function openLightbox(index) {
   if (!lightbox || !gallerySlider) return;
   gallerySlider.goTo(index);
   updateLightboxImage();
+  lightbox.classList.remove('is-static');
   lightbox.classList.add('is-open');
   lightbox.setAttribute('aria-hidden', 'false');
   body.classList.add('modal-open');
@@ -448,9 +460,23 @@ function openLightbox(index) {
 function closeLightbox() {
   if (!lightbox) return;
   lightbox.classList.remove('is-open');
+  lightbox.classList.remove('is-static');
   lightbox.setAttribute('aria-hidden', 'true');
   body.classList.remove('modal-open');
 }
+
+genplanFrame?.addEventListener('click', () => {
+  const img = genplanFrame.querySelector('img');
+  openImageLightbox(img?.currentSrc || img?.src, img?.alt, true);
+});
+
+genplanFrame?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    const img = genplanFrame.querySelector('img');
+    openImageLightbox(img?.currentSrc || img?.src, img?.alt, true);
+  }
+});
 
 galleryFigures.forEach((figure, index) => {
   figure.setAttribute('tabindex', '0');
@@ -481,6 +507,7 @@ lightbox?.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (!lightbox?.classList.contains('is-open')) return;
   if (event.key === 'Escape') closeLightbox();
+  if (lightbox.classList.contains('is-static')) return;
   if (event.key === 'ArrowLeft') { gallerySlider?.prev(); updateLightboxImage(); }
   if (event.key === 'ArrowRight') { gallerySlider?.next(); updateLightboxImage(); }
 });
