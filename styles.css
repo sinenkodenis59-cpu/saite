@@ -1159,8 +1159,8 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(4, 6, 5, .84), rgba(4, 6, 5, .28) 54%, rgba(4, 6, 5, .72)),
-    linear-gradient(0deg, rgba(4, 6, 5, .82), rgba(4, 6, 5, .14) 46%, rgba(4, 6, 5, .4));
+    linear-gradient(90deg, rgba(4, 6, 5, .62), rgba(4, 6, 5, .14) 54%, rgba(4, 6, 5, .48)),
+    linear-gradient(0deg, rgba(4, 6, 5, .64), rgba(4, 6, 5, .06) 46%, rgba(4, 6, 5, .26));
 }
 
 .infra-copy,
@@ -1194,7 +1194,7 @@ h3 {
   padding: 18px;
   border: 1px solid rgba(244, 240, 231, .16);
   border-radius: 8px;
-  background: rgba(8, 9, 7, .36);
+  background: rgba(8, 9, 7, .28);
   backdrop-filter: blur(18px);
   transition: min-height .45s var(--ease), background .35s ease, border-color .35s ease, transform .35s var(--ease);
 }
@@ -1202,7 +1202,7 @@ h3 {
 .infra-accordion article.is-active {
   min-height: 208px;
   border-color: rgba(224, 201, 134, .42);
-  background: rgba(16, 17, 13, .62);
+  background: rgba(16, 17, 13, .48);
   transform: translateY(-8px);
 }
 
