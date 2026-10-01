@@ -57,6 +57,8 @@ document.querySelectorAll('.contact-form').forEach((form) => {
     const status = form.querySelector('.form-status');
     const endpoint = form.getAttribute('action') || 'send.php';
     const formData = new FormData(form);
+    formData.set('page_url', window.location.href);
+    formData.set('referrer', document.referrer);
 
     if (status) {
       status.textContent = 'Отправляем заявку...';
