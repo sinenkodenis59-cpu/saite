@@ -814,6 +814,7 @@ h3 {
 .about__top,
 .about__bottom {
   width: var(--container);
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -1152,6 +1153,7 @@ h3 {
 
 .infra-bg img {
   object-fit: cover;
+  filter: brightness(1.12) saturate(1.08);
 }
 
 .infra-stage::after {
@@ -1159,8 +1161,8 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(4, 6, 5, .62), rgba(4, 6, 5, .14) 54%, rgba(4, 6, 5, .48)),
-    linear-gradient(0deg, rgba(4, 6, 5, .64), rgba(4, 6, 5, .06) 46%, rgba(4, 6, 5, .26));
+    linear-gradient(90deg, rgba(4, 6, 5, .38), rgba(4, 6, 5, .02) 54%, rgba(4, 6, 5, .18)),
+    linear-gradient(0deg, rgba(4, 6, 5, .48), transparent 46%, rgba(4, 6, 5, .12));
 }
 
 .infra-copy,
@@ -1170,6 +1172,7 @@ h3 {
 }
 
 .infra-copy {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .8);
   width: min(680px, 100%);
   margin-bottom: clamp(28px, 6vh, 70px);
 }
@@ -1375,8 +1378,8 @@ h3 {
 
 .genplan__frame {
   position: relative;
-  width: min(1180px, 100%, calc(62svh * 2200 / 1228));
-  aspect-ratio: 2200 / 1228;
+  width: min(1180px, 100%, calc(62svh * 2752 / 1536));
+  aspect-ratio: 2752 / 1536;
   margin: 0;
   border: 1px solid rgba(224, 201, 134, .24);
   border-radius: 8px;
@@ -1401,7 +1404,7 @@ h3 {
 }
 
 .panel.is-current .genplan__frame img {
-  transform: scale(1.018);
+  transform: none;
   filter: saturate(1.04) contrast(1.02);
 }
 
@@ -1985,9 +1988,15 @@ h3 {
   object-fit: cover;
 }
 
+/* The first image is a persistent base, avoiding dark gaps between scenes. */
 .architecture__images img {
+  height: 100%;
+  opacity: 1;
+}
+
+.architecture__images img:nth-child(n + 2) {
   opacity: 0;
-  animation: fullSceneFade 14s var(--ease) infinite;
+  animation: architectureScene 21s var(--ease) infinite;
   animation-play-state: paused;
 }
 
@@ -1995,8 +2004,7 @@ h3 {
   animation-play-state: running;
 }
 
-.architecture__images img:nth-child(2) {
-  height: 100%;
+.architecture__images img:nth-child(3) {
   animation-delay: 7s;
 }
 
@@ -2067,20 +2075,10 @@ h3 {
   backdrop-filter: blur(18px);
 }
 
-@keyframes fullSceneFade {
-  0% {
-    opacity: 0;
-    transform: scale(1.04) translate3d(1.2%, 0, 0);
-  }
-  10%,
-  48% {
-    opacity: 1;
-  }
-  58%,
-  100% {
-    opacity: 0;
-    transform: scale(1.1) translate3d(-1.2%, -1%, 0);
-  }
+@keyframes architectureScene {
+  0%, 28% { opacity: 0; }
+  33.333%, 61.333% { opacity: 1; }
+  66.666%, 100% { opacity: 0; }
 }
 
 @keyframes locationScenePan {
@@ -2647,6 +2645,11 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .architecture__images img:nth-child(n + 2) {
+    animation: none;
+    opacity: 0;
+  }
+
   *,
   *::before,
   *::after {
