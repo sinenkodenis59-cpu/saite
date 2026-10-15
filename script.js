@@ -346,7 +346,7 @@ function splitHeadingWords(el) {
   el.classList.add('split');
 }
 
-const splitTargets = [...document.querySelectorAll('main h2')];
+const splitTargets = [...document.querySelectorAll('main h2')].filter(el => !el.closest('.cinema-about, .cinema-film'));
 splitTargets.forEach(splitHeadingWords);
 
 const splitObserver = new IntersectionObserver((entries) => {
